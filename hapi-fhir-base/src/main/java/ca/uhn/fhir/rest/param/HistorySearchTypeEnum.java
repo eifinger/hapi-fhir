@@ -22,7 +22,7 @@ package ca.uhn.fhir.rest.param;
 
 import java.util.Arrays;
 
-public enum SearchParameterTypeEnum {
+public enum HistorySearchTypeEnum {
 	AT("_at"),
 	SINCE("_since"),
 	COUNT("_count");
@@ -33,16 +33,16 @@ public enum SearchParameterTypeEnum {
 
 	private final String value;
 
-	SearchParameterTypeEnum(String value) {
+	HistorySearchTypeEnum(String value) {
 		this.value = value;
 	}
 
-	public static SearchParameterTypeEnum parse(String value){
-		return Arrays.stream(SearchParameterTypeEnum.values())
+	public static HistorySearchTypeEnum parse(String value){
+		return Arrays.stream(HistorySearchTypeEnum.values())
 			.filter(type -> type.value.equals(value)).findAny().orElse(null);
 	}
 
 	public boolean isAt(){
-		return this == SearchParameterTypeEnum.AT;
+		return this == HistorySearchTypeEnum.AT;
 	}
 }

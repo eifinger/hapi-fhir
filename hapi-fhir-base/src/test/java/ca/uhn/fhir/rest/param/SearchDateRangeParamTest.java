@@ -16,15 +16,15 @@ class SearchDateRangeParamTest {
 		assertEquals(theOffset, param.getTheOffset());
 
 		param = new SearchDateRangeParam(Map.of("_at", new String[]{"value"}), dateRangeParam, theOffset);
-		assertEquals(SearchParameterTypeEnum.AT, param.getSearchParameterType());
+		assertEquals(HistorySearchTypeEnum.AT, param.getSearchParameterType());
 		assertEquals(theOffset, param.getTheOffset());
 
 		param = new SearchDateRangeParam(Map.of("_since", new String[]{"value"}), dateRangeParam, theOffset);
-		assertEquals(SearchParameterTypeEnum.SINCE, param.getSearchParameterType());
+		assertEquals(HistorySearchTypeEnum.SINCE, param.getSearchParameterType());
 		assertEquals(theOffset, param.getTheOffset());
 
 		param = new SearchDateRangeParam(Map.of("_count", new String[]{"value"}), dateRangeParam, theOffset);
-		assertEquals(SearchParameterTypeEnum.COUNT, param.getSearchParameterType());
+		assertEquals(HistorySearchTypeEnum.COUNT, param.getSearchParameterType());
 		assertEquals(theOffset, param.getTheOffset());
 
 	}
