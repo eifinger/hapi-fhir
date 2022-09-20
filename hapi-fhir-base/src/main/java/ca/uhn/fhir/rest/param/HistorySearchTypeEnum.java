@@ -28,18 +28,18 @@ public enum HistorySearchTypeEnum {
 	COUNT("_count");
 
 	public String getValue() {
-		return value;
+		return myValue;
 	}
 
-	private final String value;
+	private final String myValue;
 
-	HistorySearchTypeEnum(String value) {
-		this.value = value;
+	HistorySearchTypeEnum(String theValue) {
+		this.myValue = theValue;
 	}
 
 	public static HistorySearchTypeEnum parse(String value){
 		return Arrays.stream(HistorySearchTypeEnum.values())
-			.filter(type -> type.value.equals(value)).findAny().orElse(null);
+			.filter(type -> type.myValue.equals(value)).findAny().orElse(null);
 	}
 
 	public boolean isAt(){

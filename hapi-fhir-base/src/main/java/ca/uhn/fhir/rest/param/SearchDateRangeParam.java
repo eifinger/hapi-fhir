@@ -20,32 +20,31 @@ package ca.uhn.fhir.rest.param;
  * #L%
  */
 
-import javax.annotation.Nullable;
 import java.util.Map;
 
 public class SearchDateRangeParam extends DateRangeParam {
-	public SearchDateRangeParam(Map<String, String[]> theParameters, DateRangeParam value,
+	public SearchDateRangeParam(Map<String, String[]> theParameters, DateRangeParam theDateRange,
 										 Integer theOffset){
-		super(value);
+		super(theDateRange);
 		if(null != theParameters) {
 			theParameters.keySet().forEach(key -> {
-				searchParameterType = HistorySearchTypeEnum.parse(key);
-				if(null != searchParameterType) {
+				theHistorySearchType = HistorySearchTypeEnum.parse(key);
+				if(null != theHistorySearchType) {
 					return;
 				}
 			});
 		}
-		this.theOffset = theOffset;
+		this.myOffset = theOffset;
 	}
-	private HistorySearchTypeEnum searchParameterType;
+	private HistorySearchTypeEnum theHistorySearchType;
 
-	private Integer theOffset;
+	private Integer myOffset;
 
-	public HistorySearchTypeEnum getSearchParameterType() {
-		return searchParameterType;
+	public HistorySearchTypeEnum getHistorySearchType() {
+		return theHistorySearchType;
 	}
 
-	public Integer getTheOffset() {
-		return theOffset;
+	public Integer getOffset() {
+		return myOffset;
 	}
 }

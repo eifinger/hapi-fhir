@@ -983,7 +983,7 @@ public abstract class BaseHapiFhirResourceDao<T extends IBaseResource> extends B
 		BaseHasResource entity = readEntity(id, theRequest);
 
 		IBundleProvider retVal = super.history(theRequest, myResourceName, entity.getId(), searchDateRangeParam.getLowerBoundAsInstant(),
-			searchDateRangeParam.getUpperBoundAsInstant(), searchDateRangeParam.getTheOffset(), searchDateRangeParam.getSearchParameterType());
+			searchDateRangeParam.getUpperBoundAsInstant(), searchDateRangeParam.getOffset(), searchDateRangeParam.getHistorySearchType());
 
 		ourLog.debug("Processed history on {} in {}ms", id, w.getMillisAndRestart());
 		return retVal;
