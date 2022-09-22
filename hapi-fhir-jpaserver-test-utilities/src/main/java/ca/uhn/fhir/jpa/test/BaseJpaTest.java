@@ -823,16 +823,14 @@ public abstract class BaseJpaTest extends BaseTest {
 	}
 
 	public SearchDateRangeParam createSearchDateRangeParam(Date theSince, Date theUntil, Integer theOffset){
+		return createSearchDateRangeParam(HistorySearchTypeEnum.SINCE, theSince, theUntil, theOffset);
+	}
+	public SearchDateRangeParam createSearchDateRangeParam(HistorySearchTypeEnum theHistorySearchType, Date theSince,
+																			 Date theUntil, Integer theOffset){
 		String[] values = new String[]{"value"};
-		String key = null;
 		DateRangeParam dateRangeParam = new DateRangeParam();
-		if(null != theSince) {
-			key = HistorySearchTypeEnum.SINCE.getValue();
-			dateRangeParam = new DateRangeParam(theSince, null);
-		} else {
-			key = HistorySearchTypeEnum.AT.getValue();
-			dateRangeParam = new DateRangeParam(theUntil, null);
-		}
+		String key = theHistorySearchType.getValue();
+		dateRangeParam = new DateRangeParam(theSince, theUntil);
 		Map map = Map.of(key, values);
 
 		return new SearchDateRangeParam(map, dateRangeParam, theOffset);
