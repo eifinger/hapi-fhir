@@ -52,7 +52,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -122,12 +121,9 @@ public interface IFhirResourceDao<T extends IBaseResource> extends IDao {
 
 	Class<T> getResourceType();
 
-	IBundleProvider history(Date theSince, Date theUntil, Integer theOffset, RequestDetails theRequestDetails);
+	IBundleProvider history(SearchDateRangeParam theSearchDateRangeParam, RequestDetails theRequestDetails);
 
-	// TODO remove following one when CDR is refactored
-	IBundleProvider history(IIdType theId, Date theSince, Date theUntil, Integer theOffset, RequestDetails theRequestDetails);
-
-	IBundleProvider history(IIdType theId, SearchDateRangeParam searchDateRangeParam, RequestDetails theRequestDetails);
+	IBundleProvider history(IIdType theId, SearchDateRangeParam theSearchDateRangeParam, RequestDetails theRequestDetails);
 
 	/**
 	 * Not supported in DSTU1!

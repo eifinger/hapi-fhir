@@ -94,7 +94,7 @@ public class FhirResourceDaoR4TagsTest extends BaseResourceProviderR4Test {
 	public void testStoreAndRetrieveVersionedTags_History() {
 		initializeVersioned();
 
-		IBundleProvider history = myPatientDao.history(null, null, null, mySrd);
+		IBundleProvider history = myPatientDao.history(null, mySrd);
 
 		// Version 1
 		Patient patient = (Patient) history.getResources(0, 999).get(1);
@@ -112,7 +112,7 @@ public class FhirResourceDaoR4TagsTest extends BaseResourceProviderR4Test {
 	public void testStoreAndRetrieveNonVersionedTags_History() {
 		initializeNonVersioned();
 
-		IBundleProvider history = myPatientDao.history(null, null, null, mySrd);
+		IBundleProvider history = myPatientDao.history(null, mySrd);
 
 		// Version 1
 		Patient patient = (Patient) history.getResources(0, 999).get(1);

@@ -529,11 +529,14 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> extends BaseStora
 		return retVal;
 	}
 
-	protected IBundleProvider history(RequestDetails theRequest, String theResourceType, Long theResourcePid, Date theRangeStartInclusive, Date theRangeEndInclusive, Integer theOffset) {
+	protected IBundleProvider history(RequestDetails theRequest, String theResourceType, Long theResourcePid,
+												 Date theRangeStartInclusive, Date theRangeEndInclusive, Integer theOffset) {
 		return history(theRequest, theResourceType, theResourcePid, theRangeStartInclusive, theRangeEndInclusive, theOffset, null);
 	}
 
-	protected IBundleProvider history(RequestDetails theRequest, String theResourceType, Long theResourcePid, Date theRangeStartInclusive, Date theRangeEndInclusive, Integer theOffset, HistorySearchTypeEnum searchParameterType) {
+	protected IBundleProvider history(RequestDetails theRequest, String theResourceType, Long theResourcePid,
+												 Date theRangeStartInclusive, Date theRangeEndInclusive, Integer theOffset,
+												 HistorySearchTypeEnum searchParameterType) {
 		String resourceName = defaultIfBlank(theResourceType, null);
 
 		Search search = new Search();

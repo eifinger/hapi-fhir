@@ -70,6 +70,9 @@ import ca.uhn.fhir.jpa.util.CircularQueueCaptureQueriesListener;
 import ca.uhn.fhir.jpa.util.MemoryCacheService;
 import ca.uhn.fhir.rest.api.Constants;
 import ca.uhn.fhir.rest.api.server.IBundleProvider;
+import ca.uhn.fhir.rest.param.DateRangeParam;
+import ca.uhn.fhir.rest.param.HistorySearchTypeEnum;
+import ca.uhn.fhir.rest.param.SearchDateRangeParam;
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.ResourceVersionConflictException;
 import ca.uhn.fhir.rest.server.servlet.ServletRequestDetails;
@@ -121,9 +124,11 @@ import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -815,5 +820,21 @@ public abstract class BaseJpaTest extends BaseTest {
 			fail("Size " + theCallable.call() + " is != target " + theTarget + " - " + theFailureMessage.call());
 		}
 		Thread.sleep(500);
+	}
+
+	public SearchDateRangeParam createSearchDateRangeParam(Date theSince, Date theUntil, Integer theOffset){
+		String[] values = new String[]{"value"};
+		String key = null;
+		DateRangeParam dateRangeParam = new DateRangeParam();
+		if(null != theSince) {
+			key = HistorySearchTypeEnum.SINCE.getValue();
+			dateRangeParam = new DateRangeParam(theSince, null);
+		} else {
+			key = HistorySearchTypeEnum.AT.getValue();
+			dateRangeParam = new DateRangeParam(theUntil, null);
+		}
+		Map map = Map.of(key, values);
+
+		return new SearchDateRangeParam(map, dateRangeParam, theOffset);
 	}
 }

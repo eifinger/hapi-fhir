@@ -136,7 +136,7 @@ public abstract class BaseJpaResourceProvider<T extends IBaseResource> extends B
 		startRequest(theRequest);
 		try {
 			DateRangeParam sinceOrAt = processSinceOrAt(theSince, theAt);
-			return myDao.history(sinceOrAt.getLowerBoundAsInstant(), sinceOrAt.getUpperBoundAsInstant(), theOffset, theRequestDetails);
+			return myDao.history(new SearchDateRangeParam(theRequestDetails.getParameters(), sinceOrAt, theOffset), theRequestDetails);
 		} finally {
 			endRequest(theRequest);
 		}

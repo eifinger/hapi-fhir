@@ -2358,7 +2358,7 @@ public class FhirSystemDaoR4Test extends BaseJpaR4SystemTest {
 			// ok
 		}
 
-		IBundleProvider history = myPatientDao.history(id, null, null, null, mySrd);
+		IBundleProvider history = myPatientDao.history(id, null, mySrd);
 		assertEquals(2, history.size().intValue());
 
 		assertNotNull(ResourceMetadataKeyEnum.DELETED_AT.get((IAnyResource) history.getResources(0, 1).get(0)));

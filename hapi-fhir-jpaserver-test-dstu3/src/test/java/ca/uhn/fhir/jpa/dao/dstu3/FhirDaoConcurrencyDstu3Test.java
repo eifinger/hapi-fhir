@@ -122,7 +122,7 @@ public class FhirDaoConcurrencyDstu3Test extends BaseJpaDstu3SystemTest {
 		Long currentVersion = currentPatient.getIdElement().getVersionIdPartAsLong();
 		ourLog.info("Current version: {}", currentVersion);
 
-		IBundleProvider historyBundle = myPatientDao.history(new IdType("Patient/PID"), null, null, null, mySrd);
+		IBundleProvider historyBundle = myPatientDao.history(new IdType("Patient/PID"), null, mySrd);
 		List<IBaseResource> resources = historyBundle.getResources(0, 1000);
 		List<Long> versions = new ArrayList<>();
 		for (IBaseResource next : resources) {

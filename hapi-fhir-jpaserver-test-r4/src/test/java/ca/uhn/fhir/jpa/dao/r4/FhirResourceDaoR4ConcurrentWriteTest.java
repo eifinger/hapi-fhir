@@ -540,7 +540,7 @@ public class FhirResourceDaoR4ConcurrentWriteTest extends BaseJpaR4Test {
 		}
 
 		// Make sure we saved the object
-		IBundleProvider patient = myPatientDao.history(patientId, null, null, null, null);
+		IBundleProvider patient = myPatientDao.history(patientId, null, null);
 		assertThat(patient.sizeOrThrowNpe(), greaterThanOrEqualTo(3));
 
 	}

@@ -341,7 +341,7 @@ public class PatientIdPartitionInterceptorTest extends BaseJpaR4SystemTest {
 		myOrganizationDao.update(org);
 
 		myCaptureQueriesListener.clear();
-		IBundleProvider outcome = myOrganizationDao.history(new IdType("Organization/C"), null, null, null, mySrd);
+		IBundleProvider outcome = myOrganizationDao.history(new IdType("Organization/C"), null, mySrd);
 		assertEquals(2, outcome.size());
 		myCaptureQueriesListener.logSelectQueries();
 		assertEquals(3, myCaptureQueriesListener.getSelectQueries().size());
@@ -508,7 +508,7 @@ public class PatientIdPartitionInterceptorTest extends BaseJpaR4SystemTest {
 
 	@Test
 	public void testHistory_Type() {
-		myOrganizationDao.history(null, null, null, mySrd);
+		myOrganizationDao.history(null, mySrd);
 	}
 
 	@Test
