@@ -23,6 +23,7 @@ import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import ca.uhn.fhir.rest.api.server.storage.ResourcePersistentId;
 import ca.uhn.fhir.rest.param.DateParam;
 import ca.uhn.fhir.rest.param.DateRangeParam;
+import ca.uhn.fhir.rest.param.HistorySearchTypeEnum;
 import ca.uhn.fhir.rest.param.ParamPrefixEnum;
 import ca.uhn.fhir.rest.param.QuantityParam;
 import ca.uhn.fhir.rest.param.ReferenceParam;
@@ -1333,7 +1334,7 @@ public class FhirResourceDaoDstu3Test extends BaseJpaDstu3Test {
 
 		// By instance
 		history = myPatientDao.history(id, createSearchDateRangeParam(middleDate, null, null), mySrd);
-		assertEquals(halfSize + 1, history.size().intValue());
+		assertEquals(halfSize, history.size().intValue());
 		for (int i = 0; i < halfSize; i++) {
 			String expected = id.withVersion(Integer.toString(fullSize + 1 - i)).getValue();
 			String actual = history.getResources(i, i + 1).get(0).getIdElement().getValue();
@@ -1400,7 +1401,7 @@ public class FhirResourceDaoDstu3Test extends BaseJpaDstu3Test {
 
 		// By instance
 		history = myPatientDao.history(id, createSearchDateRangeParam(middleDate, null, null), mySrd);
-		assertEquals(halfSize + 1, history.size().intValue());
+		assertEquals(halfSize, history.size().intValue());
 		for (int i = 0; i < halfSize; i++) {
 			String expected = id.withVersion(Integer.toString(fullSize + 1 - i)).getValue();
 			String actual = history.getResources(i, i + 1).get(0).getIdElement().getValue();
@@ -1540,10 +1541,12 @@ public class FhirResourceDaoDstu3Test extends BaseJpaDstu3Test {
 
 		List<String> idValues;
 
-		idValues = toUnqualifiedIdValues(myPatientDao.history(id, createSearchDateRangeParam(preDates.get(0), preDates.get(3), null), mySrd));
-		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1), ids.get(0)));
+		idValues = toUnqualifiedIdValues(myPatientDao.history(id, createSearchDateRangeParam(HistorySearchTypeEnum.AT,
+			preDates.get(0), preDates.get(3), null), mySrd));
+		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1)));
 
-		idValues = toUnqualifiedIdValues(myPatientDao.history(createSearchDateRangeParam(preDates.get(0), preDates.get(3), null), mySrd));
+		idValues = toUnqualifiedIdValues(myPatientDao.history(createSearchDateRangeParam(HistorySearchTypeEnum.AT,
+			preDates.get(0), preDates.get(3), null), mySrd));
 		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1)));
 
 		idValues = toUnqualifiedIdValues(mySystemDao.history(preDates.get(0), preDates.get(3), null, mySrd));

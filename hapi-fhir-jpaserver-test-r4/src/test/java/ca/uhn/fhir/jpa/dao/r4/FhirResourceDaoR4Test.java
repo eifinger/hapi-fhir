@@ -2109,11 +2109,12 @@ public class FhirResourceDaoR4Test extends BaseJpaR4Test {
 
 		List<String> idValues;
 
-		idValues = toUnqualifiedIdValues(myPatientDao.history(id, createSearchDateRangeParam(
+		idValues = toUnqualifiedIdValues(myPatientDao.history(id, createSearchDateRangeParam(HistorySearchTypeEnum.AT,
 			preDates.get(0), preDates.get(3), null), mySrd));
-		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1), ids.get(0)));
+		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1)));
 
-		idValues = toUnqualifiedIdValues(myPatientDao.history(createSearchDateRangeParam(preDates.get(0), preDates.get(3), null), mySrd));
+		idValues = toUnqualifiedIdValues(myPatientDao.history(createSearchDateRangeParam(HistorySearchTypeEnum.AT,
+			preDates.get(0), preDates.get(3), null), mySrd));
 		assertThat(idValues, contains(ids.get(3), ids.get(2), ids.get(1)));
 
 		idValues = toUnqualifiedIdValues(mySystemDao.history(preDates.get(0), preDates.get(3), null, mySrd));
