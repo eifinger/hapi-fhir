@@ -968,11 +968,8 @@ public abstract class BaseHapiFhirResourceDao<T extends IBaseResource> extends B
 			retVal = super.history(theRequest, myResourceName, entityId, null, null, null, null);
 		}
 
-		if(null != id) {
-			ourLog.debug("Processed history on {} in {}ms", id, w.getMillisAndRestart());
-		} else {
-			ourLog.debug("Processed history on {} in {}ms", myResourceName, w.getMillisAndRestart());
-		}
+		ourLog.debug("Processed history on {} in {}ms", null != id ? id : myResourceName, w.getMillisAndRestart());
+		
 		return retVal;
 	}
 
