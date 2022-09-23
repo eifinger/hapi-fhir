@@ -959,12 +959,14 @@ public abstract class BaseHapiFhirResourceDao<T extends IBaseResource> extends B
 			entity = readEntity(id, theRequest);
 		}
 
-		IBundleProvider retVal = super.history(theRequest, myResourceName,
-			null == entity? null : entity.getId(),
-			null == theSearchDateRangeParam ? null : theSearchDateRangeParam.getLowerBoundAsInstant(),
-			null == theSearchDateRangeParam ? null : theSearchDateRangeParam.getUpperBoundAsInstant(),
-			null == theSearchDateRangeParam ? null : theSearchDateRangeParam.getOffset(),
-			null == theSearchDateRangeParam ? null : theSearchDateRangeParam.getHistorySearchType());
+		IBundleProvider retVal;
+		Long entityId = null == entity ? null : entity.getId();
+		if(null != theSearchDateRangeParam){
+			retVal = super.history(theRequest, myResourceName, entityId, theSearchDateRangeParam.getLowerBoundAsInstant(),
+				theSearchDateRangeParam.getUpperBoundAsInstant(), theSearchDateRangeParam.getOffset(), theSearchDateRangeParam.getHistorySearchType());
+		} else {
+			retVal = super.history(theRequest, myResourceName, entityId, null, null, null, null);
+		}
 
 		if(null != id) {
 			ourLog.debug("Processed history on {} in {}ms", id, w.getMillisAndRestart());

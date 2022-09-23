@@ -2,5 +2,5 @@
 type: fix
 issue: 4008
 jira: SMILE-4296
-title: "Previously, when user search for the date between the records' updated date, only latest record is returned.
-After updating search criteria, the results returned will include the records updated after search date and the latest one before it."
+title: "Previously, in history query, _since and _at share the same logic query. When user search for the date between the records' updated date with _at, the record of _at time is not returned.
+After update, new search type is added. _since query works as before and _at query returns the record of _at time."

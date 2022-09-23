@@ -536,7 +536,7 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> extends BaseStora
 
 	protected IBundleProvider history(RequestDetails theRequest, String theResourceType, Long theResourcePid,
 												 Date theRangeStartInclusive, Date theRangeEndInclusive, Integer theOffset,
-												 HistorySearchTypeEnum searchParameterType) {
+												 HistorySearchTypeEnum theSearchParameterType) {
 		String resourceName = defaultIfBlank(theResourceType, null);
 
 		Search search = new Search();
@@ -549,7 +549,7 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> extends BaseStora
 		search.setResourceId(theResourcePid);
 		search.setSearchType(SearchTypeEnum.HISTORY);
 		search.setStatus(SearchStatusEnum.FINISHED);
-		search.setSearchParameterType(searchParameterType);
+		search.setSearchParameterType(theSearchParameterType);
 
 		return myPersistedJpaBundleProviderFactory.newInstance(theRequest, search);
 	}

@@ -7167,10 +7167,10 @@ public class ResourceProviderR4Test extends BaseResourceProviderR4Test {
 	}
 
 	private void verifyAtBehaviourWhenQueriedDateBeforeTwoUpdatedDates(Long patientId, int delayInMs, Date dateV1, Date dateV2) throws IOException {
-		Date timeBetweenUpdates = DateUtils.addMilliseconds(dateV1, - delayInMs);
-		assertTrue(timeBetweenUpdates.before(dateV1));
-		assertTrue(timeBetweenUpdates.before(dateV2));
-		List<String> resultIds = searchAndReturnUnqualifiedIdValues(ourServerBase + "/Patient/" + patientId + "/_history?_at=gt" + toStr(timeBetweenUpdates));
+		Date timeBeforeUpdates = DateUtils.addMilliseconds(dateV1, - delayInMs);
+		assertTrue(timeBeforeUpdates.before(dateV1));
+		assertTrue(timeBeforeUpdates.before(dateV2));
+		List<String> resultIds = searchAndReturnUnqualifiedIdValues(ourServerBase + "/Patient/" + patientId + "/_history?_at=gt" + toStr(timeBeforeUpdates));
 		assertEquals(2, resultIds.size());
 		assertTrue(resultIds.contains("Patient/"+ patientId +"/_history/1"));
 		assertTrue(resultIds.contains("Patient/"+ patientId +"/_history/2"));
